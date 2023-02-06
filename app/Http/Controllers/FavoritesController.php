@@ -10,7 +10,8 @@ class FavoritesController extends Controller
 
     public function index()
     {
-        //
+        $mensaje = favorites::all();
+        return response()->json($mensaje, 200);
     }
 
     public function create()
