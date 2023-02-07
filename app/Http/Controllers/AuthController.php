@@ -11,7 +11,6 @@ use \stdClass;
 
 class AuthController extends Controller
 {
-
   public function register(Request $request)
   {
     $validator = Validator::make($request->all(), 
@@ -49,7 +48,7 @@ class AuthController extends Controller
     $user = User::where('email', $request['email'])->firstOrFail();
     $token = $user->createToken('auth_token')->plainTextToken;
 
-    $message = 
+    $response = 
     [
       'message' => 'WELCOME USER',
       'accessToken' => $token,
@@ -57,7 +56,7 @@ class AuthController extends Controller
       'user' => $user
     ];
 
-    return response()->json($message);
+    return response()->json($response);
   }
 
   public function logout()
@@ -65,10 +64,9 @@ class AuthController extends Controller
     auth()->user()->tokens()->delete();
     $message = 
     [
-      'message' => 'The token has been deleted'
+      'message' => 'You have successfully and the token has been deleted'
     ];
 
     return response()->json($message);
   }
-
 }

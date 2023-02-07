@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 
 class FavoritesController extends Controller
 {
-
     public function index()
     {
-        $mensaje = favorites::all();
+        $mensaje ="hola";
         return response()->json($mensaje, 200);
     }
 
