@@ -44,9 +44,11 @@ class UserController extends Controller
         User::where('id','=',$id)->update($user);
         $message = 
         [
-          "message" => "The user has been updated"
+          'message' => 'The user has been updated',
+          'status' => 200
+          
         ];
-        return response()->json($message,200);
+        return response()->json($message);
       }
       else
       {

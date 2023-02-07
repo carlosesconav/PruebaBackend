@@ -10,6 +10,7 @@ class CreateFavoritesTable extends Migration
     public function up()
     {
         Schema::create('favorites', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('id_user');
             $table->string('ref_api');
             

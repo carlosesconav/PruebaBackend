@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorites;
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 class FavoritesController extends Controller
 {
     public function index()
     {
-        $mensaje ="hola";
-        return response()->json($mensaje, 200);
+        $data = Favorites::all();
+        $mensaje =
+         [
+            'message' => 'The user has been updated',
+            'status' => 200    
+          ];
+        return response()->json([$mensaje, $data]);
     }
 
     public function create()
@@ -20,7 +27,14 @@ class FavoritesController extends Controller
 
     public function store(Request $request)
     {
-        //
+      $data = request()->except('_token');
+      $message = 
+      [
+        'message' => 'Data saved successfully',
+        'status' => 200
+      ];
+      Favorites::insert($data);
+      return response()->json([$message, $data]);
     }
 
     public function show(Favorites $favorites)
@@ -38,8 +52,16 @@ class FavoritesController extends Controller
         //
     }
 
-    public function destroy(Favorites $favorites)
+    public function destroy($id)
     {
-        //
+        $message = 
+        [
+          'message' => 'The data has been deleted',
+          'status' => 200
+        ];  
+      $data= Favorites::findOrFail($id);
+      Favorites::destroy($id);  
+      
+      return response()->json($message);
     }
 }
