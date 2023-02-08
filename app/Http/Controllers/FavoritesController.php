@@ -3,21 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Favorites;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 
 class FavoritesController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        $data = Favorites::all();
-        $mensaje =
-         [
-            'message' => 'The user has been updated',
-            'status' => 200    
-          ];
-        return response()->json([$mensaje, $data]);
+        $user = User::findOrFail($id);
+        $data = Favorites::all()->where('id_user',"=",$user->id);
+        return response()->json($data);
     }
 
     public function create()

@@ -41,8 +41,12 @@ class AuthController extends Controller
   {
     if(!Auth::attempt($request->only('email','password')))
     {
-      $message = ['message' => 'Unauthorized'];
-      return response()->json($message, 401);
+      $message = 
+      [
+       'message' => 'Unauthorized',
+       'status' => 401
+      ];
+      return response()->json($message);
     }
 
     $user = User::where('email', $request['email'])->firstOrFail();
@@ -51,6 +55,7 @@ class AuthController extends Controller
     $response = 
     [
       'message' => 'WELCOME USER',
+      'status' => 200,
       'accessToken' => $token,
       'token_type' => 'Bearer',
       'user' => $user

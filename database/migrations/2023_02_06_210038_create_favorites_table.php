@@ -12,7 +12,7 @@ class CreateFavoritesTable extends Migration
         Schema::create('favorites', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_user');
-            $table->string('ref_api');
+            $table->bigInteger('ref_api');
             
         });
     }
