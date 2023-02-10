@@ -51,11 +51,11 @@ class FavoritesController extends Controller
 
     public function destroy($id)
     {
-        $message = 
-        [
-          'message' => 'The data has been deleted',
-          'status' => 200
-        ];  
+     $message = 
+     [
+      'message' => 'The data has been deleted',
+      'status' => 200
+     ];  
       $data= Favorites::findOrFail($id);
       Favorites::destroy($id);  
       
